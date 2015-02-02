@@ -2,5 +2,5 @@
 
 Base Maven projects to get most the good stuff. Checkstyle, PMD, Website generation and deployment to OSS Nexus.
 
-[Maven Site](http://rexhoffman.github.io/MavenBase/1.0.0/)
+[Maven Site](http://rexhoffman.github.io/MavenBase/1.0.0-SNAPSHOT/)
 
