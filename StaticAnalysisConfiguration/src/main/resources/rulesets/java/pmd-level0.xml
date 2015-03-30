@@ -8,7 +8,6 @@
   <rule ref="rulesets/java/basic.xml/UnnecessaryConversionTemporary" />
   <rule ref="rulesets/java/empty.xml">
     <exclude name="EmptyCatchBlock" />
-    <exclude name="AvoidUsingHardCodedIP" />
   </rule>
   <rule ref="rulesets/java/empty.xml/EmptyCatchBlock">
     <properties>
