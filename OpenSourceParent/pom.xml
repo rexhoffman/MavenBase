@@ -22,6 +22,7 @@
         <plugin.maven.depedency.version>2.10</plugin.maven.depedency.version>
         <plugin.maven.deployer.version>2.7</plugin.maven.deployer.version>
         <plugin.maven.duplicate.finder.version>1.0.9</plugin.maven.duplicate.finder.version>
+        <plugin.maven.enforcer.version>1.4</plugin.maven.enforcer.version>
         <plugin.maven.findbugs.version>3.0.0</plugin.maven.findbugs.version>
         <plugin.maven.install.version>2.4</plugin.maven.install.version>
         <plugin.maven.jacoco.version>0.7.2.201409121644</plugin.maven.jacoco.version>
@@ -162,7 +163,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>${enforcer.version}</version>
+                    <version>${plugin.maven.enforcer.version}</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.semver</groupId>
