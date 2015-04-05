@@ -5,7 +5,7 @@
      Simple Ruleset
   </description>
   <rule ref="rulesets/java/unusedcode.xml" />
-  <rule ref="rulesets/java/basic.xml/UnnecessaryConversionTemporary" />
+  <rule ref="rulesets/java/unnecessary.xml/UnnecessaryConversionTemporary" />
   <rule ref="rulesets/java/empty.xml">
     <exclude name="EmptyCatchBlock" />
   </rule>

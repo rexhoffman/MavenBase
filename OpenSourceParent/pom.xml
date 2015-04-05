@@ -32,13 +32,13 @@
         <plugin.maven.jdepend.version>2.0</plugin.maven.jdepend.version>
         <plugin.maven.jxr.version>2.5</plugin.maven.jxr.version>
         <plugin.maven.pmd.version>3.4</plugin.maven.pmd.version>
-        <plugin.maven.processor.version>2.2.4</plugin.maven.processor.version>
+        <plugin.maven.processor.version>3.1.0-beta1</plugin.maven.processor.version>
         <plugin.maven.reports.version>2.8</plugin.maven.reports.version>
         <plugin.maven.sortpom.version>2.3.0</plugin.maven.sortpom.version>
         <plugin.maven.source.version>2.4</plugin.maven.source.version>
         <plugin.maven.surefire.version>2.18.1</plugin.maven.surefire.version>
         <pmd.fail>true</pmd.fail>
-        <pmd.priority>4</pmd.priority>
+        <pmd.priority>5</pmd.priority>
         <pmd.rules>rulesets/java/pmd-level0.xml</pmd.rules>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <semver.version>0.9.33</semver.version>
@@ -163,7 +163,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>${plugin.maven.enforcer.version}</version>
+                    <version>${enforcer.version}</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.semver</groupId>
@@ -256,21 +256,6 @@
                 <plugin>
                     <artifactId>maven-pmd-plugin</artifactId>
                     <version>${plugin.maven.pmd.version}</version>
-                    <configuration>
-                        <rulesets>
-                            <ruleset>${pmd.rules}</ruleset>
-                        </rulesets>
-                        <printFailingErrors>true</printFailingErrors>
-                        <failOnViolation>${pmd.fail}</failOnViolation>
-                        <failurePriority>${pmd.priority}</failurePriority>
-                        <targetJdk>${plugin.maven.java.version}</targetJdk>
-                        <includeTests>true</includeTests>
-                        <excludeRoots>
-                            <excludeRoot>${project.build.directory}/generated-sources/apt/</excludeRoot>
-                            <excludeRoot>${project.build.directory}/generated-sources/apt-test/</excludeRoot>
-                            <excludeRoot>${project.build.directory}/</excludeRoot>
-                        </excludeRoots>
-                    </configuration>
                     <dependencies>
                         <dependency>
                             <groupId>org.e-hoffman.maven</groupId>
@@ -280,10 +265,48 @@
                     </dependencies>
                     <executions>
                         <execution>
+                            <id>report</id>
+                            <goals>
+                                <goal>pmd</goal>
+                            </goals>
+                            <inherited>true</inherited>
+                            <configuration>
+                                <rulesets>
+                                    <ruleset>${pmd.rules}</ruleset>
+                                </rulesets>
+                                <excludeRoots>
+                                    <excludeRoot>${project.build.directory}/generated-sources/apt/</excludeRoot>
+                                    <excludeRoot>${project.build.directory}/generated-sources/apt-test/</excludeRoot>
+                                    <excludeRoot>${project.build.directory}/</excludeRoot>
+                                </excludeRoots>
+                                <targetJdk>${plugin.maven.java.version}</targetJdk>
+                                <includeTests>true</includeTests>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>check</id>
                             <goals>
                                 <goal>check</goal>
                             </goals>
-                            <phase>test</phase>
+                            <inherited>true</inherited>
+                            <configuration>
+                                <rulesets>
+                                    <ruleset>${pmd.rules}</ruleset>
+                                </rulesets>
+                                <excludeRoots>
+                                    <excludeRoot>${project.build.directory}/generated-sources/apt/</excludeRoot>
+                                    <excludeRoot>${project.build.directory}/generated-sources/apt-test/</excludeRoot>
+                                    <excludeRoot>${project.build.directory}/</excludeRoot>
+                                </excludeRoots>
+                                <excludes>
+                                    <!-- works around a bug in m2e-codequality -->
+                                    <exclude>${project.build.directory}/**/*.js</exclude>
+                                </excludes>
+                                <printFailingErrors>true</printFailingErrors>
+                                <failOnViolation>${pmd.fail}</failOnViolation>
+                                <failurePriority>${pmd.priority}</failurePriority>
+                                <includeTests>true</includeTests>
+                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
@@ -329,26 +352,19 @@
                                 </reportSets>
                             </plugin>
                             <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-pmd-plugin</artifactId>
+                                <version>${plugin.maven.pmd.version}</version>
+                                <configuration>
+                                    <linkXRef>true</linkXRef>
+                                    <skipEmptyReport>false</skipEmptyReport>
+                                </configuration>
+                            </plugin>
+                            <plugin>
                                 <artifactId>maven-checkstyle-plugin</artifactId>
                                 <version>${plugin.maven.checkstyle.version}</version>
                                 <configuration>
                                     <configLocation>${checkstyle.xml}</configLocation>
-                                </configuration>
-                            </plugin>
-                            <plugin>
-                                <artifactId>maven-pmd-plugin</artifactId>
-                                <version>${plugin.maven.pmd.version}</version>
-                                <configuration>
-                                    <rulesets>
-                                        <ruleset>${pmd.rules}</ruleset>
-                                    </rulesets>
-                                    <linkXref>true</linkXref>
-                                    <targetJdk>${plugin.maven.java.version}</targetJdk>
-                                    <includeTests>true</includeTests>
-                                    <excludeRoots>
-                                        <excludeRoot>${project.build.directory}/generated-sources/apt/</excludeRoot>
-                                        <excludeRoot>${project.build.directory}/generated-sources/apt-test/</excludeRoot>
-                                    </excludeRoots>
                                 </configuration>
                             </plugin>
                             <plugin>
