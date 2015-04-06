@@ -126,7 +126,9 @@
                     <version>${plugin.maven.checkstyle.version}</version>
                     <configuration>
                         <configLocation>${checkstyle.xml}</configLocation>
-                        <includeTestSourceDirectory>false</includeTestSourceDirectory>
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                        <includeResources>false</includeResources>
+                        <includeTestResources>false</includeTestResources>
                     </configuration>
                     <dependencies>
                         <dependency>
@@ -138,7 +140,7 @@
                     <executions>
                         <execution>
                             <goals>
-                                <goal>checkstyle</goal>
+                                <goal>check</goal>
                             </goals>
                             <phase>generate-sources</phase>
                         </execution>
@@ -476,6 +478,31 @@
                     <version>${plugin.maven.findbugs.version}</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>1.7</version>
+                    <configuration>
+                        <licenseName>apache_v2</licenseName>
+                        <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+                        <failOnMissingHeader>true</failOnMissingHeader>
+                        <failOnNotUptodateHeader>true</failOnNotUptodateHeader>
+                        <organizationName>Rex Hoffman</organizationName>
+                        <encoding>utf-8</encoding>
+                        <roots>
+                            <root>src/main/java</root>
+                            <root>src/test/java</root>
+                        </roots>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check-file-header</goal>
+                            </goals>
+                            <phase>validate</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${plugin.maven.jacoco.version}</version>
@@ -551,6 +578,10 @@
             <plugin>
                 <groupId>org.bsc.maven</groupId>
                 <artifactId>maven-processor-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>

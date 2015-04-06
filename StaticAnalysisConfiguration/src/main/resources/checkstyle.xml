@@ -13,6 +13,11 @@ with a longer line limit
 <module name="Checker">
   <property name="severity" value="warning"/>
   <property name="charset" value="UTF-8"/>
+  <module name="RegexpHeader">
+    <property name="header"
+    value="/*$\n^ \* #%L$\n^ \* [^\$]*$\n^ \* %%$\n^ \* Copyright \(C\) (\d\d\d\d) Rex Hoffman$\n^ \* %%$\n^ \* Licensed under the Apache License, Version 2.0 \(the &quot;License&quot;\);$\n^ \* you may not use this file except in compliance with the License.$\n^ \* You may obtain a copy of the License at$\n^ \* $\n^ \*      http://www.apache.org/licenses/LICENSE-2.0$\n^ \* $\n^ \* Unless required by applicable law or agreed to in writing, software$\n^ \* distributed under the License is distributed on an &quot;AS IS&quot; BASIS,$\n^ \* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.$\n^ \* See the License for the specific language governing permissions and$\n^ \* limitations under the License.$\n^ \* #L%$\n^ \*/$"/>   
+  </module>
+  <module name="SuppressWarningsFilter" />
   <module name="TreeWalker">
     <module name="OuterTypeFilename"/>
     <module name="IllegalTokenText">
@@ -115,7 +120,7 @@ with a longer line limit
     <module name="OverloadMethodsDeclarationOrder"/>
     <module name="VariableDeclarationUsageDistance"/>
     <module name="ImportOrder">
-      <property name="groups" value="/^javax?\./,org"/>
+      <property name="groups" value="/^javax?\./"/>
       <property name="ordered" value="true"/>
       <property name="separated" value="true"/>
       <property name="option" value="top"/>
@@ -155,6 +160,7 @@ with a longer line limit
       <message key="name.invalidPattern" value="Method name ''{0}'' must match pattern ''{1}''."/>
     </module>
     <module name="SingleLineJavadoc"/>
+    <module name="SuppressWarningsHolder" />
   </module>
   <module name="FileTabCharacter">
     <property name="eachLine" value="true"/>
