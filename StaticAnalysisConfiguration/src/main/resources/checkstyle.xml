@@ -120,7 +120,7 @@ with a longer line limit
     <module name="OverloadMethodsDeclarationOrder"/>
     <module name="VariableDeclarationUsageDistance"/>
     <module name="ImportOrder">
-      <property name="groups" value="/^javax?\./"/>
+      <property name="groups" value="java,javax,org,com"/>
       <property name="ordered" value="true"/>
       <property name="separated" value="true"/>
       <property name="option" value="top"/>

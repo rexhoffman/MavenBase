@@ -132,6 +132,11 @@
                     </configuration>
                     <dependencies>
                         <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>6.6</version>
+                        </dependency>
+                        <dependency>
                             <groupId>org.e-hoffman.maven</groupId>
                             <artifactId>StaticAnalysisConfiguration</artifactId>
                             <version>${static.analysis.configuration.version}</version>
