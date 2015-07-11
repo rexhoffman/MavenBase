@@ -124,6 +124,7 @@ with a longer line limit
       <property name="ordered" value="true"/>
       <property name="separated" value="true"/>
       <property name="option" value="top"/>
+      <property name="sortStaticImportsAlphabetically" value="true"/>
     </module>
     <module name="MethodParamPad"/>
     <module name="OperatorWrap">
