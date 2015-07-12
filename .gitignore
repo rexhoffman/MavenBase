@@ -1,4 +1,6 @@
-/.settings/
-/.project
-/target/
-/.pmd
+**/.settings/
+**/.project
+**/target/
+**/.pmd
+**/.checkstyle
+**/.classpath

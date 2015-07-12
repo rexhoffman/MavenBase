@@ -48,6 +48,34 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>2.11</version>
+                    <configuration>
+                        <header>com/mycila/maven/plugin/license/templates/MIT.txt</header>
+                        <properties>
+                            <owner>Rex Hoffman</owner>
+                            <email>rex@e-hoffman.org</email>
+                        </properties>
+                        <excludes>
+                            <exclude>pom.xml</exclude>
+                            <exclude>**/README</exclude>
+                            <exclude>src/test/resources/**</exclude>
+                            <exclude>src/main/resources/**</exclude>
+                        </excludes>
+                        <mapping>
+                           <java>SLASHSTAR_STYLE</java>
+                        </mapping>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
                     <groupId>com.ning.maven.plugins</groupId>
                     <artifactId>maven-duplicate-finder-plugin</artifactId>
                     <version>${plugin.maven.duplicate.finder.version}</version>
@@ -483,31 +511,6 @@
                     <version>${plugin.maven.findbugs.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>license-maven-plugin</artifactId>
-                    <version>1.7</version>
-                    <configuration>
-                        <licenseName>apache_v2</licenseName>
-                        <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
-                        <failOnMissingHeader>true</failOnMissingHeader>
-                        <failOnNotUptodateHeader>true</failOnNotUptodateHeader>
-                        <organizationName>Rex Hoffman</organizationName>
-                        <encoding>utf-8</encoding>
-                        <roots>
-                            <root>src/main/java</root>
-                            <root>src/test/java</root>
-                        </roots>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>check-file-header</goal>
-                            </goals>
-                            <phase>validate</phase>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${plugin.maven.jacoco.version}</version>
@@ -531,6 +534,10 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>com.ning.maven.plugins</groupId>
                 <artifactId>maven-duplicate-finder-plugin</artifactId>
@@ -583,10 +590,6 @@
             <plugin>
                 <groupId>org.bsc.maven</groupId>
                 <artifactId>maven-processor-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>license-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
