@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.e-hoffman.maven</groupId>
     <artifactId>MavenBase</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>A set of poms to provide a base to create a parent pom, OpenSourceParent which can be used as the parent of other git repos.</description>
@@ -154,32 +154,16 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>${plugin.maven.javadoc.version}</version>
                         <configuration>
-                            <quiet>true</quiet>
-                            <show>package</show>
+                            <skip>true</skip>
                         </configuration>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                    <goal>test-jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
                         <version>${plugin.maven.sources.version}</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                    <goal>test-jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+                        <configuration>
+                           <skipSource>true</skipSource>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>

@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.e-hoffman.maven</groupId>
         <artifactId>MavenBase</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
     <artifactId>OpenSourceParent</artifactId>
     <packaging>pom</packaging>
@@ -15,7 +15,6 @@
     </prerequisites>
     <properties>
         <checkstyle.version>7.2</checkstyle.version>
-        <!-- 6.16.1 -->
         <checkstyle.xml>checkstyle.xml</checkstyle.xml>
         <github.site.location>${project.version}/OpenSourceParent</github.site.location>
         <maven.plugin.license.version>3.0</maven.plugin.license.version>
@@ -362,20 +361,6 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>${plugin.maven.source.version}</version>
-                    <executions>
-                        <execution>
-                            <id>attach-source-jar</id>
-                            <goals>
-                                <goal>jar-no-fork</goal>
-                                <goal>test-jar-no-fork</goal>
-                            </goals>
-                            <phase>verify</phase>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${plugin.maven.surefire.version}</version>
                     <configuration>
@@ -568,9 +553,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-pmd-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-source-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.basepom.maven</groupId>
