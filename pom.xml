@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.e-hoffman.maven</groupId>
     <artifactId>MavenBase</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>A set of poms to provide a base to create a parent pom, OpenSourceParent which can be used as the parent of other git repos.</description>
@@ -153,9 +153,20 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>${plugin.maven.javadoc.version}</version>
+                        <!-- oss nexus demands javadoc jars -->
                         <configuration>
-                            <skip>true</skip>
+                            <quiet>true</quiet>
+                            <show>package</show>
                         </configuration>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                    <goal>test-jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
