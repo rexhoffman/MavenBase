@@ -18,17 +18,13 @@ before_script:
 - popd
 - mvn -q install -DskipTests=true
 script:
-- if [ ${TRAVIS_BRANCH} = 'master' ]; then openssl aes-256-cbc -K $encrypted_05e49db982f1_key
-  -iv $encrypted_05e49db982f1_iv -in .gpg.zip.enc -out .gpg.zip -d; fi;
+- if [ ${TRAVIS_BRANCH} = 'master' ]; then openssl aes-256-cbc -K $encrypted_05e49db982f1_key -iv $encrypted_05e49db982f1_iv -in .gpg.zip.enc -out .gpg.zip -d; fi;
 - if [ ${TRAVIS_BRANCH} = 'master' ]; then unzip .gpg.zip -d ${HOME}/deploy/; fi
 - pushd CloudySkySkin
-- if [ ${TRAVIS_BRANCH} = 'master' ]; then mvn deploy -Dgpg.passphrase=${GPG_PASSPHRASE}
-  -Dgpg.homedir=${HOME}/deploy/.gnupg/; else mvn test; fi;
+- if [ ${TRAVIS_BRANCH} = 'master' ]; then mvn deploy -Dgpg.passphrase=${GPG_PASSPHRASE} -Dgpg.homedir=${HOME}/deploy/.gnupg/; else mvn test; fi;
 - popd
-- if [ ${TRAVIS_BRANCH} = 'master' ]; then mvn deploy -Dgpg.passphrase=${GPG_PASSPHRASE}
-  -Dgpg.homedir=${HOME}/deploy/.gnupg/; else mvn test; fi;
-- if [ ${TRAVIS_BRANCH} = 'master' ]; then mvn site -Psite-deploy; else mvn site;
-  fi;
+- if [ ${TRAVIS_BRANCH} = 'master' ]; then mvn deploy -Dgpg.passphrase=${GPG_PASSPHRASE} -Dgpg.homedir=${HOME}/deploy/.gnupg/; else mvn test; fi;
+- if [ ${TRAVIS_BRANCH} = 'master' ]; then mvn site -Psite-deploy; else mvn site; fi;
 env:
   global:
   - secure: ivW8luLtYdGYyCrMlU31Py8nHqJQqmamKFJqF4DTIl9ZQckJb7TXgovMoQWLCwBumoNI+hdrm6eVCPqnyM9YGi5/Qck7kZziwong4p+6OiUlNGBfMmW3iUsOvXe0R7Z8cfJFOlcm3K7ITgxpE7tCDpXa5R1gqOE9/IIrVm4OZ9Y=

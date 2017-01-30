@@ -13,6 +13,7 @@
         <project.ossnexus.autorelease>true</project.ossnexus.autorelease>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <outputEncoding>UTF-8</outputEncoding>
+        <plugin.maven.sources.version>2.3</plugin.maven.sources.version>
     </properties>
     <dependencies>
         <!-- so generating the image css this way is a hack, a terrible hack as it works incidentally, not in a 
