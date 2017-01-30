@@ -14,6 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <outputEncoding>UTF-8</outputEncoding>
         <plugin.maven.sources.version>2.3</plugin.maven.sources.version>
+        <github.owner>rexhoffman</github.owner>
+        <github.project>MavenBase</github.project>
     </properties>
     <dependencies>
         <!-- so generating the image css this way is a hack, a terrible hack as it works incidentally, not in a 
@@ -147,5 +149,22 @@
                 </plugins>
             </build>
         </profile>
-     </profiles>   
+    </profiles>
+    <scm>
+        <connection>scm:git:git:github.com:${github.owner}/${github.project}.git</connection>
+        <developerConnection>scm:git:git:github.com:${github.owner}/${github.project}.git</developerConnection>
+        <url>https://github.com/${github.owner}/${github.project}/blob/master/</url>
+    </scm>
+    <distributionManagement>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Nexus Release Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>  
 </project>
