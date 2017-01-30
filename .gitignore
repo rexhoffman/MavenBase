@@ -4,3 +4,6 @@
 **/.pmd
 **/.checkstyle
 **/.classpath
+**/.DS_Store
+**/pom.xml.versionsBackup
+**/travis-prep.sh

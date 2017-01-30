@@ -13,15 +13,17 @@ before_script:
 - export PATH=$PWD/apache-maven-${MVN_VER}/bin:${PATH}
 - mkdir -p ${HOME}/.m2/
 - cp ./.travis/settings.xml ${HOME}/.m2/settings.xml
+- pushd CloudySkySkin
+- mvn -q install
+- popd
 - mvn -q install -DskipTests=true
-script: 
+script:
 - if [ ${TRAVIS_BRANCH} = 'master' ]; then openssl aes-256-cbc -K $encrypted_05e49db982f1_key -iv $encrypted_05e49db982f1_iv -in .gpg.zip.enc -out .gpg.zip -d; fi;
 - if [ ${TRAVIS_BRANCH} = 'master' ]; then unzip .gpg.zip -d ${HOME}/deploy/; fi
+- pushd CloudySkySkin
+- if [ ${TRAVIS_BRANCH} = 'master' ]; then mvn deploy -Dgpg.passphrase=${GPG_PASSPHRASE} -Dgpg.homedir=${HOME}/deploy/.gnupg/; else mvn test; fi;
+- popd
 - if [ ${TRAVIS_BRANCH} = 'master' ]; then mvn deploy -Dgpg.passphrase=${GPG_PASSPHRASE} -Dgpg.homedir=${HOME}/deploy/.gnupg/; else mvn test; fi;
 - if [ ${TRAVIS_BRANCH} = 'master' ]; then mvn site -Psite-deploy; else mvn site; fi;
 env:
   global:
-  - secure: acJwM4aQNO3dKaVAankphL13BGiaMSa4UYmYQ5kNqyMYsaMM124LGF8IG/s3TIlvgo8CzeyrZKxRMSDd6VF+M+d21aKn1zBv7E1bYtEgXI+713QXXqchB+CP3bgEc6Ts1/Jotk6priRje2B2FFvR3QTLrAFAbJHeMserVx+kNhA=
-  - secure: F+fdrqmwxLNSSUX8qS0NqUtTVnWZk61N8ibI5owt6Ay7+yn9Zesjdt8EoAc1syekm5/2Bb0niRA/nh88gfrlmaRavZnHS4LdLowR+c9+S4YqbydJRdNqiAl6PbBQ1ViqFvbYx3L7QZRbg+jR3rUXoR/TPTZboIB1MHeu+K8MBRg=
-  - secure: Mrz8zA06GrcxZWUf8WT7Umqp/Pq5GW4ImrpsBVVbj4WKvWqlGfQfSzJuFAjGreD/g6s4K4wtzjcb1txsxwUTjrW0QrJyu99bhde7go/83oa5rtK/M2XdhYuPs2pIjaSSg2EPcasC45BlhAifr0rdmryg0Ox/QinB8EF+pkagjVU=
-  - secure: oAgFczQDKjyCNLcjxAst2QS9LpNRofpVM47MnY1CbQAZu8AbhPon7hnjr1NaiJRxJRHu7SM6ZNCc1sf8NuoE5srqk+rSizwSgA0RDxnRycYnMRrJgw3M5DaUAqpmknDCTks23fJWyIIwCMe3w7Fqn2kq+FLImnubCS4HHfekkRw=
