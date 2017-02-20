@@ -6,7 +6,7 @@
   <skin>
     <groupId>org.e-hoffman.maven</groupId>
     <artifactId>CloudySkySkin</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>${cloudy.sky.sking.version}</version>
   </skin>
   <custom>
     <fluidoSkin>

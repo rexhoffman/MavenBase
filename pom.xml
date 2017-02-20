@@ -13,7 +13,7 @@
         <module>OpenSourceParent</module>
     </modules>
     <properties>
-        <cloudy.sky.sking.version>1.0.0</cloudy.sky.sking.version>
+        <cloudy.sky.sking.version>1.0.3-SNAPSHOT</cloudy.sky.sking.version>
         <github.global.server>github</github.global.server>
         <github.owner>rexhoffman</github.owner>
         <github.project>MavenBase</github.project>
@@ -31,6 +31,7 @@
         <plugin.maven.sources.version>3.0.1</plugin.maven.sources.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.ossnexus.autorelease>true</project.ossnexus.autorelease>
+        <static.analysis.configuration.version>1.0.3-SNAPSHOT</static.analysis.configuration.version>
     </properties>
     <build>
         <pluginManagement>
@@ -108,13 +109,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>${plugin.maven.site.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.e-hoffman.maven</groupId>
-                        <artifactId>CloudySkySkin</artifactId>
-                        <version>${cloudy.sky.sking.version}</version>
-                    </dependency>
-                </dependencies>
                 <executions>
                     <execution>
                         <id>attach-site-descriptor</id>

@@ -49,7 +49,6 @@
         <pmd.rules>rulesets/java/pmd-level0.xml</pmd.rules>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <released>true</released>
-        <static.analysis.configuration.version>1.0.3-SNAPSHOT</static.analysis.configuration.version>
     </properties>
     <build>
         <pluginManagement>
