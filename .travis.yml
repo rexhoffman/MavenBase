@@ -20,9 +20,6 @@ before_script:
 script:
 - if [ ${TRAVIS_BRANCH} = 'master' ]; then openssl aes-256-cbc -K $encrypted_05e49db982f1_key -iv $encrypted_05e49db982f1_iv -in .gpg.zip.enc -out .gpg.zip -d; fi;
 - if [ ${TRAVIS_BRANCH} = 'master' ]; then unzip .gpg.zip -d ${HOME}/deploy/; fi
-- pushd CloudySkySkin
-- if [ ${TRAVIS_BRANCH} = 'master' ]; then mvn deploy -Dgpg.passphrase=${GPG_PASSPHRASE} -Dgpg.homedir=${HOME}/deploy/.gnupg/; else mvn test; fi;
-- popd
 - if [ ${TRAVIS_BRANCH} = 'master' ]; then mvn deploy -Dgpg.passphrase=${GPG_PASSPHRASE} -Dgpg.homedir=${HOME}/deploy/.gnupg/; else mvn test; fi;
 - if [ ${TRAVIS_BRANCH} = 'master' ]; then mvn -e site -Psite-deploy; else mvn site; fi;
 env:

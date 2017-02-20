@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.e-hoffman.maven</groupId>
+    <parent>
+        <groupId>org.e-hoffman.maven</groupId>
+        <artifactId>MavenBase</artifactId>
+        <version>1.0.3-SNAPSHOT</version>
+    </parent>
     <artifactId>CloudySkySkin</artifactId>
-    <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
     <description>A fluido skin overlay made a bit prettier.</description>
     <properties>
         <additional-source-folder>${project.build.directory}/unpacked/resources/</additional-source-folder>
+        <github.site.location>${project.version}/${project.artifactId}</github.site.location>
         <maven.fluido.skin.version>1.6</maven.fluido.skin.version>
-        <project.ossnexus.autorelease>true</project.ossnexus.autorelease>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <outputEncoding>UTF-8</outputEncoding>
         <plugin.maven.sources.version>2.3</plugin.maven.sources.version>
-        <github.owner>rexhoffman</github.owner>
-        <github.project>MavenBase</github.project>
     </properties>
     <dependencies>
         <!-- so generating the image css this way is a hack, a terrible hack as it works incidentally, not in a 
@@ -94,77 +93,4 @@
             </plugin>
         </plugins>
     </build>
-    <profiles>
-        <!-- not all builders will have credentials, hence disable by default -->
-        <profile>
-            <id>sign-for-oss-nexus</id>
-            <activation>
-                <property>
-                    <name>gpg.passphrase</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                      <groupId>org.apache.maven.plugins</groupId>
-                      <artifactId>maven-gpg-plugin</artifactId>
-                      <version>1.6</version>
-                      <executions>
-                          <execution>
-                              <id>sign-artifacts</id>
-                              <goals>
-                                  <goal>sign</goal>
-                              </goals>
-                              <phase>verify</phase>
-                          </execution>
-                      </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.10.4</version>
-                        <!-- oss nexus demands javadoc jars -->
-                        <configuration>
-                            <quiet>true</quiet>
-                            <show>package</show>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                    <goal>test-jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>${plugin.maven.sources.version}</version>
-                        <configuration>
-                           <skipSource>true</skipSource>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-    <scm>
-        <connection>scm:git:git:github.com:${github.owner}/${github.project}.git</connection>
-        <developerConnection>scm:git:git:github.com:${github.owner}/${github.project}.git</developerConnection>
-        <url>https://github.com/${github.owner}/${github.project}/blob/master/</url>
-    </scm>
-    <distributionManagement>
-        <repository>
-            <id>sonatype-nexus-staging</id>
-            <name>Nexus Release Repository</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-        <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>  
 </project>

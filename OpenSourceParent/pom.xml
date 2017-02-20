@@ -16,7 +16,7 @@
     <properties>
         <checkstyle.version>7.5</checkstyle.version>
         <checkstyle.xml>checkstyle.xml</checkstyle.xml>
-        <github.site.location>${project.version}/OpenSourceParent</github.site.location>
+        <github.site.location>${project.version}/${project.artifactId}</github.site.location>
         <maven.plugin.license.version>3.0</maven.plugin.license.version>
         <outputEncoding>UTF-8</outputEncoding>
         <plugin.maven.checkstyle.version>2.17</plugin.maven.checkstyle.version>
@@ -49,7 +49,7 @@
         <pmd.rules>rulesets/java/pmd-level0.xml</pmd.rules>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <released>true</released>
-        <static.analysis.configuration.version>${project.parent.version}</static.analysis.configuration.version>
+        <static.analysis.configuration.version>1.0.3-SNAPSHOT</static.analysis.configuration.version>
     </properties>
     <build>
         <pluginManagement>

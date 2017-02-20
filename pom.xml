@@ -8,7 +8,7 @@
     <name>${project.artifactId}</name>
     <description>A set of poms to provide a base to create a parent pom, OpenSourceParent which can be used as the parent of other git repos.</description>
     <modules>
-        <!--  CloudySkySkin can't have the skin as a module and use it here. -->
+        <module>CloudySkySkin</module>
         <module>StaticAnalysisConfiguration</module>
         <module>OpenSourceParent</module>
     </modules>
@@ -20,6 +20,7 @@
         <github.site.location>${project.version}/</github.site.location>
         <!-- https://github.com/mycila/license-maven-plugin/tree/master/license-maven-plugin/src/main/resources/com/mycila/maven/plugin/license/templates -->
         <license>MIT</license>
+        <outputEncoding>UTF-8</outputEncoding>
         <plugin.maven.clean.version>3.0.0</plugin.maven.clean.version>
         <plugin.maven.github.site.version>0.12</plugin.maven.github.site.version>
         <plugin.maven.gpg.version>1.6</plugin.maven.gpg.version>
