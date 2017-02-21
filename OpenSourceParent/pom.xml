@@ -46,7 +46,7 @@
         <plugin.maven.takari.version>1.12.3</plugin.maven.takari.version>
         <pmd.fail>true</pmd.fail>
         <pmd.priority>5</pmd.priority>
-        <pmd.rules>rulesets/java/pmd-level0.xml</pmd.rules>
+        <pmd.rules>/rulesets/java/pmd-level0.xml</pmd.rules>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <released>true</released>
     </properties>
@@ -297,6 +297,25 @@
                 <plugin>
                     <artifactId>maven-pmd-plugin</artifactId>
                     <version>${plugin.maven.pmd.version}</version>
+                    <configuration>
+                        <rulesets>
+                            <ruleset>${pmd.rules}</ruleset>
+                        </rulesets>
+                        <excludeRoots>
+                            <excludeRoot>${project.build.directory}/generated-sources/apt/</excludeRoot>
+                            <excludeRoot>${project.build.directory}/generated-sources/apt-test/</excludeRoot>
+                            <excludeRoot>${project.build.directory}/</excludeRoot>
+                        </excludeRoots>
+                        <excludes>
+                            <!-- works around a bug in m2e-codequality -->
+                            <exclude>${project.build.directory}/**/*.js</exclude>
+                        </excludes>
+                        <printFailingErrors>true</printFailingErrors>
+                        <failOnViolation>${pmd.fail}</failOnViolation>
+                        <failurePriority>${pmd.priority}</failurePriority>
+                        <includeTests>true</includeTests>
+                        <targetJdk>${plugin.maven.java.version}</targetJdk>
+                    </configuration>
                     <dependencies>
                         <dependency>
                             <groupId>org.e-hoffman.maven</groupId>
@@ -306,48 +325,11 @@
                     </dependencies>
                     <executions>
                         <execution>
-                            <id>report</id>
-                            <goals>
-                                <goal>pmd</goal>
-                            </goals>
-                            <inherited>true</inherited>
-                            <configuration>
-                                <rulesets>
-                                    <ruleset>${pmd.rules}</ruleset>
-                                </rulesets>
-                                <excludeRoots>
-                                    <excludeRoot>${project.build.directory}/generated-sources/apt/</excludeRoot>
-                                    <excludeRoot>${project.build.directory}/generated-sources/apt-test/</excludeRoot>
-                                    <excludeRoot>${project.build.directory}/</excludeRoot>
-                                </excludeRoots>
-                                <targetJdk>${plugin.maven.java.version}</targetJdk>
-                                <includeTests>true</includeTests>
-                            </configuration>
-                        </execution>
-                        <execution>
                             <id>check</id>
                             <goals>
                                 <goal>check</goal>
                             </goals>
-                            <inherited>true</inherited>
-                            <configuration>
-                                <rulesets>
-                                    <ruleset>${pmd.rules}</ruleset>
-                                </rulesets>
-                                <excludeRoots>
-                                    <excludeRoot>${project.build.directory}/generated-sources/apt/</excludeRoot>
-                                    <excludeRoot>${project.build.directory}/generated-sources/apt-test/</excludeRoot>
-                                    <excludeRoot>${project.build.directory}/</excludeRoot>
-                                </excludeRoots>
-                                <excludes>
-                                    <!-- works around a bug in m2e-codequality -->
-                                    <exclude>${project.build.directory}/**/*.js</exclude>
-                                </excludes>
-                                <printFailingErrors>true</printFailingErrors>
-                                <failOnViolation>${pmd.fail}</failOnViolation>
-                                <failurePriority>${pmd.priority}</failurePriority>
-                                <includeTests>true</includeTests>
-                            </configuration>
+                            <phase>pre-integration-test</phase>
                         </execution>
                     </executions>
                 </plugin>
@@ -445,6 +427,24 @@
                                     <package>org.w3c.dom.xpath</package>
                                 </packages>
                             </exception>
+                            <exception>
+                                <conflictingDependencies>
+                                    <dependency>
+                                        <groupId>org.springframework</groupId>
+                                        <artifactId>spring-aop</artifactId>
+                                        <version>[4.3.0,)</version>
+                                    </dependency>
+                                    <dependency>
+                                        <groupId>aopalliance</groupId>
+                                        <artifactId>aopalliance</artifactId>
+                                        <version>[1.0,)</version>
+                                    </dependency>
+                                </conflictingDependencies>
+                                <packages>
+                                    <package>org.aopalliance.aop</package>
+                                    <package>org.aopalliance.intercept</package>
+                                </packages>
+                            </exception>
                         </exceptions>
                     </configuration>
                     <executions>
@@ -516,7 +516,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>            
+            </plugin>
             <plugin>
                 <artifactId>maven-enforcer-plugin</artifactId>
             </plugin>
